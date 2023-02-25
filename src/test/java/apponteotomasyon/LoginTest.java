@@ -46,6 +46,8 @@ public class LoginTest {
 
     By searchText = By.id("mobi.appcent.apponte:id/search_src_text");
 
+    By homeButton = By.id("mobi.appcent.apponte:id/homeFragmentIcon");
+
 
 
 
@@ -149,6 +151,20 @@ public class LoginTest {
         driver.getKeyboard().sendKeys("H");
 
         Thread.sleep(2000);
+
+        //android.widget.TextView
+        //Hayrullah Dedeler
+
+        if (driver.findElementByXPath("//android.widget.TextView[@text='Hayrullah Dedeler']").isDisplayed()){
+
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            driver.findElementByXPath("//android.widget.TextView[@text='Hayrullah Dedeler']").click();
+        } else {
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            driver.findElement(By.id("mobi.appcent.apponte:id/homeFragmentIcon")).click();
+            Thread.sleep(5000);
+        }
+
 
 
 
