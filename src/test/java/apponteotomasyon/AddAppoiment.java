@@ -2,6 +2,7 @@ package apponteotomasyon;
 
 import io.appium.java_client.AppiumDriver;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
@@ -34,6 +35,17 @@ public class AddAppoiment {
     By addDateButton = By.id("mobi.appcent.apponte:id/tvAddDate");
 
     By addDateSaveButton = By.id("mobi.appcent.apponte:id/btnAddPeopleSave");
+
+    By saveMeetingTime = By.id("mobi.appcent.apponte:id/btnSaveMeetingTime");
+
+    By meetPopUpPath = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup");
+
+    By costumSaveButton = By.id("mobi.appcent.apponte:id/btnCustomSave");
+
+    By costumCancelButton = By.id("mobi.appcent.apponte:id/btnCustomCancel");
+
+    By pageCloseButton = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageButton");
+
 
 
 
@@ -99,11 +111,11 @@ public class AddAppoiment {
         driver.findElementByXPath("//android.widget.TextView[@text='20']").click();
 
         if (driver.findElementByXPath("//android.widget.TextView[@text='Geçmişe yönelik randevu alınamamaktadır.']").isDisplayed()){
-          String selectDayStr =  driver.findElementByXPath("//android.widget.TextView[@text='20']").getText();
-          String todayDayStr =  driver.findElementByXPath("//android.widget.TextView[@text='24']").getText();
+          String selectDayStr =  driver.findElementByXPath("//android.widget.TextView[@text='27']").getText();
+          String todayDayStr =  driver.findElementByXPath("//android.widget.TextView[@text='28']").getText();
 
             System.out.println(selectDayStr);
-            System.out.println(todayDayStr);
+            System.out.println(todayDayStr+" Today");
 
             int selectDayInt = Integer.parseInt(selectDayStr);
             int todayDayInt = Integer.parseInt(todayDayStr);
@@ -116,8 +128,9 @@ public class AddAppoiment {
 
             if (selectDayInt>=todayDayInt){
                 driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-                driver.findElementByXPath("//android.widget.TextView[@text='"+selectDayInt+"']").click();
-                Thread.sleep(10000);
+                driver.findElementByXPath("//android.widget.TextView[@text='28']").click();
+                Thread.sleep(1000);
+                driver.findElementByXPath("//android.widget.TextView[@text='28']").click();
 
                 TouchAction swipe2 = new TouchAction(driver)
                         .press(PointOption.point(584,2110))
@@ -125,9 +138,33 @@ public class AddAppoiment {
                         .moveTo(PointOption.point(669,1264))
                         .release()
                         .perform();
+                Thread.sleep(2000);
+
+                TouchAction swipe3 = new TouchAction(driver)
+                        .press(PointOption.point(148,1650))
+                        .waitAction(WaitOptions.waitOptions(Duration.ofMillis(800)))
+                        .moveTo(PointOption.point(978,1653))
+                        .release()
+                        .perform();
 
                 driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-                driver.findElementByXPath("//android.widget.TextView[@text='09.00 - 10.00']").click();
+                driver. findElementByXPath("//android.widget.TextView[@text='18.00 - 19.00']").click();
+
+                Thread.sleep(4000);
+
+                driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(50 )"));
+
+                driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+
+                WebElement saveMeetingTimeSelect = driver.findElement(saveMeetingTime);
+                saveMeetingTimeSelect.click();
+
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+                WebElement saveButtonSelect1 = driver.findElement(addDateSaveButton);
+                saveButtonSelect1.click();
+
+
             }
         }
 
